@@ -1,0 +1,10 @@
+{% extends 'contact/base.html' %}
+{% block content %}
+
+    <h1> Edit Contact </h1>
+    <form method="POST" action="{% url 'contact_edit' pk=contact.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-default" type="submit" value="submit">Update</button>
+    </form>    
+{% endblock %}
