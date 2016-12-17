@@ -2,9 +2,9 @@
 {% block content %}
 
     <h1> Add new contact </h1>
-    <form method="POST">
+    <form method="POST" action="{% url 'contact_new' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-default" type="submit">Add</button>
+        <button class="btn btn-default" type="submit" value="submit">Add</button>
     </form>    
 {% endblock %}
