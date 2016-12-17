@@ -13,7 +13,7 @@ def contact_view(request, pk):
     return render(request, 'contact/view.html', { 'contact' : contact})
 
 def contact_new(request):
-    
+    notification = None
     if request.method == "POST":
             form = ContactForm(request.POST)
             if form.is_valid():
@@ -24,13 +24,15 @@ def contact_new(request):
                 contact.phone_number = request.POST['phone_number']
                 contact.active = True
                 contact.save()
+                notification = 'Contact successfully added'                
                 return redirect('index')
     else:
         form = ContactForm()
 
-    return render(request, 'contact/new.html', {'form' : form})
+    return render(request, 'contact/new.html', {'form' : form, 'notification' : notification})
 
 def contact_edit (request, pk):
+    notification = None
     contact = get_object_or_404(Contact, pk=pk)
     if request.method == "POST":
             form = ContactForm(request.POST, instance=contact)
@@ -42,8 +44,9 @@ def contact_edit (request, pk):
                 contact.phone_number = request.POST['phone_number']
                 contact.active = True
                 contact.save()
-                return redirect('index')
+                notification = 'Contact successfully edited'
+                return redirect('contact_view', pk=contact.pk)
     else:
         form = ContactForm(instance=contact)
 
-    return render(request, 'contact/edit.html', {'form' : form, 'contact' : contact})
+    return render(request, 'contact/edit.html', {'form' : form, 'contact' : contact, 'notification' : notification})

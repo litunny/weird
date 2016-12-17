@@ -2,6 +2,9 @@
 {% block content %}
 <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
 	<div class="row panel">
+         {% if notification %}
+            <h5 class="text-center primary"> {{notification}} </h5>
+        {% endif %}
 		<div class="col-md-4 bg_blur ">
     	    <a href="{% url 'contact_edit' pk=contact.pk %}" class="follow_btn hidden-xs">Edit</a>
 		</div>
